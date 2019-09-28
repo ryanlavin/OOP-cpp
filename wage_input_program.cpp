@@ -2,8 +2,7 @@
 #include <iostream>
 
 
-int main()
-{
+int main(){
 
 // List wage
 
