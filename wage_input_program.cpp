@@ -1,8 +1,21 @@
 #include <iomanip>
 #include <iostream>
+#include <string>
 
 
 int main(){
+
+// Give first and last name
+
+    std::cout << "Enter your first name" << std::endl;
+    std::string first_name;
+    std::cin >> first_name;
+
+    std::cout << "Enter your last name" << std::endl;
+    std::string last_name;
+    std::cin >> last_name;
+    std::string full_name = first_name + " " + last_name;
+
 
 // List wage
 
@@ -27,7 +40,7 @@ int main(){
     std::cout << std::fixed << std::setprecision(2);
     double weekly_wage = (hourly_wage * weekly_hours);
     double final_wage = weekly_wage - (weekly_wage * income_tax);
-    std::cout << "You earn $" << double(final_wage) << " every week after tax." << std::endl;
+    std::cout << full_name << " " << "earns $" << double(final_wage) << " every week after tax." << std::endl;
 
 
     return 0;
