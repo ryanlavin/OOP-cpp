@@ -13,6 +13,13 @@
         return euro_converted;
     }
 
+    void rando_char(int char1){
+        for (int i = 0; i < 3; ++i) { std::cout << "-"; }
+            std::cout << "\n";
+        for (int i = 0; i < 10; ++i) { std::cout << "$";}
+            std::cout << "\n";
+    }
+
 int main(){
 std::string input;
 std::string input2;
@@ -25,12 +32,13 @@ std::string input2;
         std::cin >> euros2;
         double results1 = euro_to_usd(euros2);
         std::cout << std::setprecision(4) << euros2 << " euros is $" << std::setprecision(4) << results1 << std::endl;
+        return 1;
     }
     if (input == "no"){
         std::cout << "Would you like to convert dollars to euros? Answer \"yes\" or \"no\"" << std::endl;
         std::cin >> input2;
     }
-    else if (input != "yes" || input != "no"){
+    else if (input != "yes" && input != "no"){
         std::cout << "Error, please restart the program and try again" << std::endl;
     }
         if (input2 == "yes"){
@@ -43,9 +51,12 @@ std::string input2;
         else if (input2 == "no"){
             return 1;
         }
-        else if (input2 != "yes" || input2 != "no"){
+        else if (input2 != "yes" && input2 != "no"){
         std::cout << "Error, please restart the program and try again" << std::endl;
     }
+
+    double char1;
+    rando_char(char1);
 
     return 0;
 }
