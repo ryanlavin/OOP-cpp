@@ -2,21 +2,21 @@
 #include <cmath>
 #include <stdbool.h>
 
-int isPowerOfTwo(int x){
-    if (x == pow(2, 4)){
+void isPowerOfTwo(int& x){
+    x = sqrt(x);
+    if (0 == x % 2){
          std::cout << "True" << std::endl;
      }
-     else if(x != pow(2, 4)){
+     else if(0 != x % 2){
         std::cout << "False" << std::endl;
      }
-     return 1;
 }
 
 int main(){
     int x;
     std::cout << "Please output a number" << std::endl;
     std::cin >> x;
-    int isPowerOfTwo(x);
+    isPowerOfTwo(x);
 
     return 0;
 }
