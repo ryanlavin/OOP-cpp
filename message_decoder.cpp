@@ -8,7 +8,6 @@ The number will have either three, four digits.
 
 
 int main(){
-
     std::cout << "Please input an integer of three, four, five, or six digits" << std::endl;
     char digitChar = std::cin.get();
     int number = (digitChar - '0')*100;
@@ -17,30 +16,11 @@ int main(){
     digitChar = std::cin.get();
     number += (digitChar - '0');
     digitChar = std::cin.get();
-    if (digitChar == '\n'){
-        std::cout << "The integer inputted is: " << number << std::endl;
-        return 1;
-    }
-    else{
+    while (digitChar != '\n'){
         number = number*10 + (digitChar - '0');
+        digitChar = std::cin.get();
     }
-    digitChar = std::cin.get();
-    if (digitChar == '\n'){
-        std::cout << "The integer inputted is: " << number << std::endl;
-        return 1;
-    }
-    else{
-        number = number*10 + (digitChar - '0');
-    }
-    digitChar = std::cin.get();
-    if (digitChar == '\n'){
-        std::cout << "The number inputted is: " << number << std::endl;
-        return 1;
-    }
-    else{
-        number = number*10 + (digitChar - '0');
-        std::cout << "The number inputted is: " << number << std::endl;
-     }
+    std::cout << "Your number as an integer: " << number << std::endl;
 
 
     return 0;

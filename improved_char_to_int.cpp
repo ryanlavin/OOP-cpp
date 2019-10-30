@@ -7,6 +7,46 @@ The number will have either three or four digits.
 */
 
 int main(){
+
+    std::cout << "Please input an integer of three, four, five, or six digits" << std::endl;
+    char digitChar = std::cin.get();
+    int number = (digitChar - '0')*100;
+    digitChar = std::cin.get();
+    number += (digitChar - '0')*10;
+    digitChar = std::cin.get();
+    number += (digitChar - '0');
+    digitChar = std::cin.get();
+    if (digitChar == '\n'){
+        std::cout << "The integer inputted is: " << number << std::endl;
+        return 1;
+    }
+    else{
+        number = number*10 + (digitChar - '0');
+    }
+    digitChar = std::cin.get();
+    if (digitChar == '\n'){
+        std::cout << "The integer inputted is: " << number << std::endl;
+        return 1;
+    }
+    else{
+        number = number*10 + (digitChar - '0');
+    }
+    digitChar = std::cin.get();
+    if (digitChar == '\n'){
+        std::cout << "The number inputted is: " << number << std::endl;
+        return 1;
+    }
+    else{
+        number = number*10 + (digitChar - '0');
+        std::cout << "The number inputted is: " << number << std::endl;
+     }
+
+
+    return 0;
+}
+
+/*
+int main(){
     std::cout << "Input a number with either three or four digits" << std::endl;
     char digitChar = std::cin.get();
     int fourDigitNumber = (digitChar - '0')*1000;
@@ -29,7 +69,7 @@ int main(){
         std::cout << "The four digit number entered is: " << fourDigitNumber << std::endl;
     }
 
-/*
+
     char digitChar = std::cin.get();
     int digit = (digitChar - '0')*100;
     int overallnumber =+ digit;
@@ -38,7 +78,7 @@ int main(){
     overallnumber += digit;
     digitChar = std::cin.get();
     overallnumber += (digitChar - '0');
-    std::cout << "Your number as an integer: " << std::endl;
+    std::cout << "Your number as an integer: " << overallnumber << std::endl;
     */
 
     return 0;
