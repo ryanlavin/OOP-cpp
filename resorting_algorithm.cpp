@@ -15,7 +15,7 @@ int main(){
     const int SIZE = 9; // Sets the size of the array
     int array[SIZE] = { 1, 4, 14, 2, 1, 3, 5, 6, 23 }; // Initializes the array
     resortingFunction(array, SIZE); // Calls the function while passing the parameter variables for array (an int because the return values are integers) and SIZE
-    for (int i = 0; i < SIZE - 1; i++){ // Outputs the rearranged array after the function is called
+    for (int i = 0; i < SIZE; i++){ // Outputs the rearranged array after the function is called
         std::cout << array[i] << " ";
     }
     std::cout << "\n";
@@ -32,7 +32,7 @@ void resortingFunction(int array[], int SIZE){ // The function being called in i
             array[j] = extraVariable;
             j--;
         }
-        else{
+        else if(0 == array[i] % 2){
             i++;
         }
     }
