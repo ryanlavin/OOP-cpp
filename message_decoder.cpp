@@ -90,7 +90,7 @@ Steps:
                 break;
             case LOWERCASE:
                 number = number % 27;
-                outputCharacter = number + 'a' - 1;
+                outputCharacter = number + 'a' - 27;
                 if (number == 0){
                     std::cout << "Switch to punctuation: " << std::endl;
                     mode = PUNCTUATION;
@@ -119,7 +119,6 @@ Steps:
             std::cout << outputCharacter;
         } while(digitChar != '\n');
         std::cout << "\n";
-
-    return 0;
 }
+    return 0;
 }
