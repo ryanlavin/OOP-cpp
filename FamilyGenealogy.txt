@@ -1,0 +1,23 @@
+3 Ryan 1 Sue Tom
+
+3 Ryan 1 Sue Tom
+
+3 Jacqueline 0c Sue Tom
+
+3 Sean 1 Sue Tom
+
+3 Quin 1 Tracy Eric
+
+3 Owen 1 Tracy Eric
+
+2 Sue 0 Miriam Edward
+
+2 Eric 1 Miriam Edward
+
+2 Tom 1 Barb Ed
+
+2 Tracy 0 Chica Chico
+
+1 Miriam 0 MGGF MGGM
+
+1 Edward 1 EGGF EGGM

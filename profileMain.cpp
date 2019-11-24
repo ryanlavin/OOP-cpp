@@ -3,11 +3,11 @@
 #include "profileHeader.h"
 
 int main(){
-    std::cout << "\n";
     profile ryan("Ryan", 19, "New Orleans");
     profile ben("Ben", 20, "Cincinatti");
     profile jordan("Jordan", 19, "Seattle");
 
+    std::cout << "\n";
     std::cout << ryan.get_name() << std::endl;
     std::cout << ryan.get_age() << std::endl;
     std::cout << ryan.get_birthplace() << std::endl;

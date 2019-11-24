@@ -2,13 +2,14 @@
 
 class CashRegister{
 public:
+    double get_total();
+    int get_count();
+
     void clear();
     void add_item(double price);
 
-    double get_total() const;
-    int get_count() const;
 
 private:
-    const int item_count;
-    const double total_price;
+    double total_price;
+    int item_count;
 };

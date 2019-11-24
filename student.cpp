@@ -1,4 +1,4 @@
-#include "student.h"
+openo#include "student.h"
 
 student::student(std::string name, int id){
     this->student_name = name;

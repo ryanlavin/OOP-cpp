@@ -6,6 +6,7 @@ class student{
 public:
     student(std::string, int);
     ~student();
+
     std::string get_name(); // get the value
     int get_id();
 
