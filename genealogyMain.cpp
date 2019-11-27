@@ -23,9 +23,8 @@ int main(){
        mother[i] = motherA;
        gender[i] = genderA;
        name[i] = nameA;
-       std::cout << height[i] << name[i] << gender[i] << mother[i] << father[i] << std::endl;
+       std::cout << height[i] << " " << name[i] << " " << gender[i] << " " << mother[i] << " " << father[i] << std::endl;
     }
-
 
     familyMember *Ryan = new familyMember(height[0], name[0], gender[0], mother[0], father[0]);
     familyMember *Jacqueline = new familyMember(height[1], name[1], gender[1], mother[1], father[1]);
