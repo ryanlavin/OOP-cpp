@@ -14,12 +14,11 @@
         * If total >= 17 dealer must stand, if total <= 16, hit
         * If counting an ace as 11 would bring his total to 17 or more
           (but not over 21) he must count the ace as 11 and stand.
-    *
 */
 int main(){
     const int DECK_SIZE = 52;
-    const std::string OrigCardDeck[DECK_SIZE] = { "2-H", "3-H", "4-H", "5-H", "6-H", "7-H", "8-H", "9-H", "10-H", "J-H", "Q-H", "K-H", "A-H", "2-S", "3-S", "4-S", "5-S", "6-S", "7-S", "8-S", "9-S", "10-S", "J-S", "Q-S", "K-S", "A-S", "2-D", "3-D", "4-D", "5-D", "6-D", "7-D", "8-D", "9-D", "10-D", "J-D", "Q-D", "K-D", "A-D", "2-C", "3-C", "4-C", "5-C", "6-C", "7-C", "8-C", "9-C", "10-C", "J-C", "Q-C", "K-C", "A-C" };
-    std::string cardDeck[DECK_SIZE] = { "2-H", "3-H", "4-H", "5-H", "6-H", "7-H", "8-H", "9-H", "10-H", "J-H", "Q-H", "K-H", "A-H", "2-S", "3-S", "4-S", "5-S", "6-S", "7-S", "8-S", "9-S", "10-S", "J-S", "Q-S", "K-S", "A-S", "2-D", "3-D", "4-D", "5-D", "6-D", "7-D", "8-D", "9-D", "10-D", "J-D", "Q-D", "K-D", "A-D", "2-C", "3-C", "4-C", "5-C", "6-C", "7-C", "8-C", "9-C", "10-C", "J-C", "Q-C", "K-C", "A-C" };
+    //const std::string OrigCardDeck[DECK_SIZE] = { "2-H", "3-H", "4-H", "5-H", "6-H", "7-H", "8-H", "9-H", "10-H", "J-H", "Q-H", "K-H", "A-H", "2-S", "3-S", "4-S", "5-S", "6-S", "7-S", "8-S", "9-S", "10-S", "J-S", "Q-S", "K-S", "A-S", "2-D", "3-D", "4-D", "5-D", "6-D", "7-D", "8-D", "9-D", "10-D", "J-D", "Q-D", "K-D", "A-D", "2-C", "3-C", "4-C", "5-C", "6-C", "7-C", "8-C", "9-C", "10-C", "J-C", "Q-C", "K-C", "A-C" };
+    std::string cardDeck[DECK_SIZE];
     int i; // Integer ID for each index in the cardDeck array
     int cardDeckNum[DECK_SIZE] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51 };// Not sure if needed or not
     std::string placeHolder;
@@ -36,28 +35,39 @@ int main(){
     //this is all hard to read, Ryan.
 
     std::string suitType[4] = { "-H", "-S", "-D", "-C" };
+    std::string cardValue[13] = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
     // maybe this is better?\
     // take this and think of how you can restructure your assigned of the cardDeck
     // concatenate the strings
 
     for(int i = 0;i < 4;i++){
-
-        for(int j = 0;j < 13){
-
+        for (int j = 0; j < 13; j++){
+            int z;
+            cardDeck[z] = cardValue[j] + suitType[i];
+            z++;
         }
     }
-
+//for testing before shuffle
+    for (int i = 0; i < DECK_SIZE; i++){
+        std::cout << cardDeck[i] << " ";
+    }
+    std::cout << "\n";
 
 // Cards are shuffled here
-    for (int i = 0; i < DECK_SIZE - 1; i++){
-        int j = rand() % (DECK_SIZE - 1);
+    for (int i = DECK_SIZE-1; i > 0; i--){
+        int j = rand() % (i);
         placeHolder = cardDeck[i];
         placeHolderNum = cardDeckNum[i]; // Mirror of card shuffling with value ID shuffling
         cardDeck[i] = cardDeck[j];
         cardDeckNum[i] = cardDeckNum[j]; // Mirror
-        cardDeck[j] = cardDeck[i];
-        cardDeckNum[j] = cardDeckNum[i]; // Mirror
+        cardDeck[j] = placeHolder;
+        cardDeckNum[j] = placeHolderNum; // Mirror
     }
+//for testing post-shuffle
+    for (int i = 0; i < DECK_SIZE; i++){
+        std::cout << cardDeck[i] << " ";
+    }
+    std::cout << "\n";
 
 /* Two cards are dealt to player & dealer in alternating fashion
     * both of player's cards are face up (visible), the dealer's first card is hidden
@@ -87,7 +97,7 @@ int main(){
 
 // Outputting the card deck as a whole, for testing
 /*
-for (int i = 0; i < DECK_SIZE - 1; i++){
+    for (int i = 0; i <= DECK_SIZE; i++){
         std::cout << cardDeck[i] << " ";
     }
     std::cout << "\n";
