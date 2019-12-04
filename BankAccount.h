@@ -20,3 +20,9 @@ private:
     double balance;
     std::string accountName;
 };
+
+class CheckingAccount : public BankAccount{
+public:
+
+
+}

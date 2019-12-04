@@ -71,7 +71,8 @@ int main(){
 
 /* Two cards are dealt to player & dealer in alternating fashion
     * both of player's cards are face up (visible), the dealer's first card is hidden
-    * while the second is visible (with the hidden card displayed as "?") */
+    * while the second is visible (with the hidden card displayed as "?")
+*/
     for (int i = 0; i <= 3; i++){
         if (0 == i % 2){
             playerHandNum[i] = cardDeckNum[i];
