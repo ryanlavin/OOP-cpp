@@ -5,6 +5,10 @@ int main(){
     std::cout << "Choose the size of the array" << std::endl;
     int ARRAY_SIZE;
     std::cin >> ARRAY_SIZE;
+    if (ARRAY_SIZE <= 0){
+        std::cout << "Invalid input, restart the program and try again" << std::endl;
+        std::exit(1);
+    }
     int* array = new int[ARRAY_SIZE];
     std::cout << "Input an array of " << ARRAY_SIZE << " values in any order and the sorting algorithm will sort through the array and reorder it lowest to highest" << std::endl;
     for (int i = 0; i <= ARRAY_SIZE - 1; i++){

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <ctime>
 /*
     * Cards are shuffled
     * Two cards are dealt to player & dealer in alternating fashion
@@ -15,86 +16,215 @@
         * If counting an ace as 11 would bring his total to 17 or more
           (but not over 21) he must count the ace as 11 and stand.
 */
+
+struct card{
+    std::string label;
+    int value;
+};
+
+// Function that tests whether the player's deck has an ace and changes that ace's value to 1
+void dealerCheckForAce(int dealerCount,int dealerHandIndex ,card (&dealerHand)[dealerHandIndex]){
+    if (dealerCount > 21){
+        for (int i = 0; i < 6; i++){
+            if(dealerHand[i].value == 11){
+                dealerHand[i].value = 1;
+                dealerCount = dealerCount - 10;
+                return;
+            }
+        }
+    }
+}
+
+void playerCheckForAce(int playerCount,int playerHandIndex ,card (&playerHand)[playerHandIndex]){
+    if (playerCount > 21){
+        for (int i = 0; i < 11; i++){
+            if(playerHand[i].value == 11){
+                playerHand[i].value = 1;
+                playerCount = playerCount - 10;
+                return;
+            }
+        }
+    }
+}
+
 int main(){
-    const int DECK_SIZE = 52;
-    //const std::string OrigCardDeck[DECK_SIZE] = { "2-H", "3-H", "4-H", "5-H", "6-H", "7-H", "8-H", "9-H", "10-H", "J-H", "Q-H", "K-H", "A-H", "2-S", "3-S", "4-S", "5-S", "6-S", "7-S", "8-S", "9-S", "10-S", "J-S", "Q-S", "K-S", "A-S", "2-D", "3-D", "4-D", "5-D", "6-D", "7-D", "8-D", "9-D", "10-D", "J-D", "Q-D", "K-D", "A-D", "2-C", "3-C", "4-C", "5-C", "6-C", "7-C", "8-C", "9-C", "10-C", "J-C", "Q-C", "K-C", "A-C" };
-    std::string cardDeck[DECK_SIZE];
-    int i; // Integer ID for each index in the cardDeck array
-    int cardDeckNum[DECK_SIZE] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51 };// Not sure if needed or not
-    std::string placeHolder;
-    int placeHolderNum;
-    //std::string playerHand[11];
-    int playerHandNum[11];
-    //std::string dealerHand[11];
-    int dealerHandNum[11];
-    bool continueHand;
-    bool continueGame;
-    bool visible = true; // Boolean value that determines whether a card is visible to the player or not
-
-
-    //this is all hard to read, Ryan.
-
-    std::string suitType[4] = { "-H", "-S", "-D", "-C" };
-    std::string cardValue[13] = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-    // maybe this is better?\
-    // take this and think of how you can restructure your assigned of the cardDeck
-    // concatenate the strings
-
-    for(int i = 0;i < 4;i++){
+    const int DECK_SIZE = 52; // Deck size
+    const int HAND_SIZE = 11; // Maximum amount of cards a player can hold
+    std::string placeHolder; // For shuffling deck
+    int placeHolderNum; // For shuffling deck
+    card cardDeck[DECK_SIZE]; // array of type card
+    card playerHand[DECK_SIZE]; // Player's hand
+    card dealerHand[DECK_SIZE]; // Dealer's hand
+    bool hideCard; // Used to determine whether or not to hide the dealer's card
+    int playerCount; // Keeps track of the value of the player's hand
+    int dealerCount; // Keeps track of the value of the dealer's hand
+    std::string suitType[5] = { "Y", "H", "S", "D", "C" };
+    std::string cardLabel[13] = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+    int cardValue[13] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11 };
+    for (int i = 1; i < 5; i++){
         for (int j = 0; j < 13; j++){
             int z;
-            cardDeck[z] = cardValue[j] + suitType[i];
+            cardDeck[z].label = cardLabel[j] + "-" + suitType[i];
+            cardDeck[z].value = cardValue[j];
             z++;
         }
     }
-//for testing before shuffle
+    //for testing before shuffle
     for (int i = 0; i < DECK_SIZE; i++){
-        std::cout << cardDeck[i] << " ";
+        std::cout << cardDeck[i].label << " ";
     }
     std::cout << "\n";
 
-// Cards are shuffled here
+    // Cards are shuffled here
+    srand(time(NULL));
     for (int i = DECK_SIZE-1; i > 0; i--){
         int j = rand() % (i);
-        placeHolder = cardDeck[i];
-        placeHolderNum = cardDeckNum[i]; // Mirror of card shuffling with value ID shuffling
-        cardDeck[i] = cardDeck[j];
-        cardDeckNum[i] = cardDeckNum[j]; // Mirror
-        cardDeck[j] = placeHolder;
-        cardDeckNum[j] = placeHolderNum; // Mirror
+        placeHolder = cardDeck[j].label;
+        placeHolderNum = cardDeck[j].value; // Mirror of card shuffling with value ID shuffling
+        cardDeck[j].label = cardDeck[i].label;
+        cardDeck[j].value = cardDeck[i].value; // Mirror
+        cardDeck[i].label = placeHolder;
+        cardDeck[i].value = placeHolderNum; // Mirror
     }
-//for testing post-shuffle
+
+// For testing post shuffle
     for (int i = 0; i < DECK_SIZE; i++){
-        std::cout << cardDeck[i] << " ";
+        std::cout << cardDeck[i].label << " ";
     }
     std::cout << "\n";
 
-/* Two cards are dealt to player & dealer in alternating fashion
+/*
+    * Two cards are dealt to player & dealer in alternating fashion
     * both of player's cards are face up (visible), the dealer's first card is hidden
     * while the second is visible (with the hidden card displayed as "?")
 */
+for (int y = 0; y <=2; y++){
     for (int i = 0; i <= 3; i++){
         if (0 == i % 2){
-            playerHandNum[i] = cardDeckNum[i];
-            std::cout << "The player's card is: " << cardDeck[i] << ". ";
+            playerHand[y].value = cardDeck[i].value;
+            playerHand[y].label = cardDeck[i].label;
+            y++;
         }
         if (0 != i % 2){
-            dealerHandNum[i] = cardDeckNum[i];
             if (i == 1){
-                std::cout << "The dealer's card is: ?";
+                dealerHand[0].value = cardDeck[i].value;
+                dealerHand[0].label = "?";
             }
             else if (i == 3){
-                std::cout << "The dealer's card is: " << cardDeck[i] << ". ";
+                dealerHand[1].value = cardDeck[i].value;
+                dealerHand[1].label = cardDeck[i].label;
             }
         }
-        std::cout << "\n";
+
+    }
+}
+    std::cout << "Dealer: " << dealerHand[0].label << " " << dealerHand[1].label;
+    std::cout << "\n";
+    std::cout << "Player: " << playerHand[0].label << " " << playerHand[1].label;
+    std::cout << "\n";
+    int cardCount = 4; // The number of cards that have been played, used to determine what index of cardDeck I need to refer to
+    int playerHandIndex = 2; // Used to determine what index of player's deck I need to refer to
+    playerCount = playerHand[0].value + playerHand[1].value;
+    dealerCount = dealerHand[0].value + dealerHand[1].value;
+
+    std::cout << "Type 'h' to hit or 's' to stay" << std::endl;
+    char input;
+    std::cin.get(input);
+    if (input != 's' && input != 'h') {std::cout << "Invalid input, restart the game and try again" << std::endl; return 1;}
+    //if (input == 's') { std::cout<<playerCount<<std::endl; }
+    while(input == 'h' && playerCount < 21){
+        playerHand[playerHandIndex].value = cardDeck[cardCount].value;
+        playerHand[playerHandIndex].label = cardDeck[cardCount].label;
+        cardCount++;
+        playerCount += playerHand[playerHandIndex].value;
+        playerCheckForAce(playerCount, playerHandIndex, &playerHand[playerHandIndex]);
+/*
+        if(playerHand[playerHandIndex].value == 11 && playerCount > 21){
+            playerHand[playerHandIndex].value = playerHand[playerHandIndex].value - 10;
+            playerCount = playerCount - 10;
+        }
+*/
+        playerHandIndex++;
+        if (playerCount > 21){
+            std::cout << "Bust" << std::endl;
+            std::cout << "Lose " << playerCount << " " << dealerCount << std::endl;
+            break;
+        }
+        if (playerCount == 21){
+            std::cout << "Win " << playerCount << " " << dealerCount << std::endl;
+            break;
+        }
+        std::cout << "Player: ";
+        for(int i=0;i<playerHandIndex;i++){
+            std::cout<<playerHand[i].label<<" ";
+        }
+        std::cout << ", would you like to hit again?" << std::endl;
+        std::cin >> input;
+        if (input == 'h'){ continue; }
+        else if (input == 's') { std::cout<<playerCount<<std::endl; break; }
     }
 
+/*
+    Dealer's faced down card is now turned up
+        * If total >= 17 dealer must stand, if total <= 16, hit
+        * If counting an ace as 11 would bring his total to 17 or more
+          (but not over 21) he must count the ace as 11 and stand.
+*/
+    int dealerHandIndex = 2; // Used to determine what index of dealer's deck I need to refer to
+    std::cout << "1" << std::endl;
+    if (dealerCount < 17 && playerCount < 21){
+        std::cout << "2" << std::endl;
 
+        while (dealerCount <= 17){
+            std::cout << "3" << std::endl;
+            dealerHand[dealerHandIndex].value = cardDeck[cardCount].value;
+            dealerHand[dealerHandIndex].label = cardDeck[cardCount].label;
+            cardCount++;
+            dealerCount += dealerHand[dealerHandIndex].value;
+            if(dealerHand[dealerHandIndex].value == 11 && dealerCount > 21){
+                dealerHand[dealerHandIndex].value = dealerHand[dealerHandIndex].value - 10;
+                dealerCount = dealerCount - 10;
+            }
+            dealerHandIndex++;
+            if (dealerCount > 21){
+                std::cout << "Dealer busts" << std::endl;
+                std::cout << "Win " << playerCount << " " << dealerCount << std::endl;
+                break;
+            }
+            if(dealerCount >= 17 && dealerCount <= 21){
+                if(dealerCount > playerCount){
+                    std::cout << "Lose " << playerCount << " " << dealerCount << std::endl;
+                    break;
+                }
+                if(dealerCount < playerCount){
+                    std::cout << "Win " << playerCount << " " << dealerCount << std::endl;
+                    break;
+                }
+                if(dealerCount == playerCount){
+                    std::cout << "Tie " << playerCount << " " << dealerCount << std::endl;
+                    break;
+                }
+            }
+        }
+    }
+    else if(dealerCount >= 17 && playerCount < 21){
+        if(dealerCount > playerCount){
+            std::cout << "Lose " << playerCount << " " << dealerCount << std::endl;
+        }
+        if(dealerCount < playerCount){
+            std::cout << "Win " << playerCount << " " << dealerCount << std::endl;
+        }
+        if(dealerCount == playerCount){
+            std::cout << "Tie " << playerCount << " " << dealerCount << std::endl;
+        }
+    }
 
 
     return 0;
 }
+
+
+
 
 // Outputting the card deck as a whole, for testing
 /*

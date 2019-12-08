@@ -2,7 +2,7 @@
 
 3 Ryan 1 Sue Tom
 
-3 Jacqueline 0c Sue Tom
+3 Jacqueline 0 Sue Tom
 
 3 Sean 1 Sue Tom
 
