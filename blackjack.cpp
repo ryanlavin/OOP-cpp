@@ -23,28 +23,48 @@ struct card{
 };
 
 // Function that tests whether the player's deck has an ace and changes that ace's value to 1
-void dealerCheckForAce(int dealerCount,int dealerHandIndex ,card (&dealerHand)[dealerHandIndex]){
+int dealerCheckForAce(int dealerCount,int dealerHandIndex ,card (dealerHand[dealerHandIndex])){
     if (dealerCount > 21){
-        for (int i = 0; i < 6; i++){
+        for (int i = 0; i < dealerHandIndex+1; i++){
             if(dealerHand[i].value == 11){
                 dealerHand[i].value = 1;
-                dealerCount = dealerCount - 10;
-                return;
+                dealerCount = 0;
+                for (int j = 0; j < dealerHandIndex+1; j++){
+                    dealerCount += dealerHand[j].value;
+                }
+                return dealerCount;
+            }
+            else if(dealerHand[i].value != 11){
+                continue;
             }
         }
     }
+    else if(dealerCount <= 21){
+        return dealerCount;
+    }
+    return dealerCount;
 }
 
-void playerCheckForAce(int playerCount,int playerHandIndex ,card (&playerHand)[playerHandIndex]){
+int playerCheckForAce(int playerCount,int playerHandIndex ,card (playerHand[playerHandIndex])){//card (&playerHand)[playerHandIndex]){
     if (playerCount > 21){
-        for (int i = 0; i < 11; i++){
+        for (int i = 0; i < playerHandIndex+1; i++){
             if(playerHand[i].value == 11){
                 playerHand[i].value = 1;
-                playerCount = playerCount - 10;
-                return;
+                playerCount = 0;
+                for (int j = 0; j < playerHandIndex+1; j++){
+                    playerCount += playerHand[j].value;
+                }
+                return playerCount;
+            }
+            else if(playerHand[i].value != 11){
+                continue;
             }
         }
     }
+    else if(playerCount <= 21){
+        return playerCount;
+    }
+    return playerCount;
 }
 
 int main(){
@@ -76,7 +96,7 @@ int main(){
     std::cout << "\n";
 
     // Cards are shuffled here
-    srand(time(NULL));
+    srand(time(NULL)); // Makes the shuffling actually random
     for (int i = DECK_SIZE-1; i > 0; i--){
         int j = rand() % (i);
         placeHolder = cardDeck[j].label;
@@ -118,32 +138,28 @@ for (int y = 0; y <=2; y++){
 
     }
 }
+    playerCount = playerHand[0].value + playerHand[1].value;
+    dealerCount = dealerHand[0].value + dealerHand[1].value;
     std::cout << "Dealer: " << dealerHand[0].label << " " << dealerHand[1].label;
     std::cout << "\n";
     std::cout << "Player: " << playerHand[0].label << " " << playerHand[1].label;
     std::cout << "\n";
     int cardCount = 4; // The number of cards that have been played, used to determine what index of cardDeck I need to refer to
     int playerHandIndex = 2; // Used to determine what index of player's deck I need to refer to
-    playerCount = playerHand[0].value + playerHand[1].value;
-    dealerCount = dealerHand[0].value + dealerHand[1].value;
+
 
     std::cout << "Type 'h' to hit or 's' to stay" << std::endl;
     char input;
-    std::cin.get(input);
+    if (playerCount <= 20){
+        std::cin.get(input);
+    }
     if (input != 's' && input != 'h') {std::cout << "Invalid input, restart the game and try again" << std::endl; return 1;}
-    //if (input == 's') { std::cout<<playerCount<<std::endl; }
     while(input == 'h' && playerCount < 21){
         playerHand[playerHandIndex].value = cardDeck[cardCount].value;
         playerHand[playerHandIndex].label = cardDeck[cardCount].label;
         cardCount++;
         playerCount += playerHand[playerHandIndex].value;
-        playerCheckForAce(playerCount, playerHandIndex, &playerHand[playerHandIndex]);
-/*
-        if(playerHand[playerHandIndex].value == 11 && playerCount > 21){
-            playerHand[playerHandIndex].value = playerHand[playerHandIndex].value - 10;
-            playerCount = playerCount - 10;
-        }
-*/
+        playerCount = playerCheckForAce(playerCount, playerHandIndex, playerHand);
         playerHandIndex++;
         if (playerCount > 21){
             std::cout << "Bust" << std::endl;
@@ -171,20 +187,13 @@ for (int y = 0; y <=2; y++){
           (but not over 21) he must count the ace as 11 and stand.
 */
     int dealerHandIndex = 2; // Used to determine what index of dealer's deck I need to refer to
-    std::cout << "1" << std::endl;
     if (dealerCount < 17 && playerCount < 21){
-        std::cout << "2" << std::endl;
-
         while (dealerCount <= 17){
-            std::cout << "3" << std::endl;
             dealerHand[dealerHandIndex].value = cardDeck[cardCount].value;
             dealerHand[dealerHandIndex].label = cardDeck[cardCount].label;
             cardCount++;
             dealerCount += dealerHand[dealerHandIndex].value;
-            if(dealerHand[dealerHandIndex].value == 11 && dealerCount > 21){
-                dealerHand[dealerHandIndex].value = dealerHand[dealerHandIndex].value - 10;
-                dealerCount = dealerCount - 10;
-            }
+            dealerCount = dealerCheckForAce(dealerCount, dealerHandIndex, dealerHand);
             dealerHandIndex++;
             if (dealerCount > 21){
                 std::cout << "Dealer busts" << std::endl;
@@ -224,21 +233,18 @@ for (int y = 0; y <=2; y++){
 }
 
 
-
-
-// Outputting the card deck as a whole, for testing
+// Old way of changing dealer's ace value, now inputted into a function and improved
 /*
-    for (int i = 0; i <= DECK_SIZE; i++){
-        std::cout << cardDeck[i] << " ";
-    }
-    std::cout << "\n";
+            if(dealerHand[dealerHandIndex].value == 11 && dealerCount > 21){
+                dealerHand[dealerHandIndex].value = dealerHand[dealerHandIndex].value - 10;
+                dealerCount = dealerCount - 10;
+            }
 */
 
-// Outputting the card deck & it's associated integer ID as a whole, for testing
+// Old way of changing player's ace value, now inputted into a function and improved
 /*
-for (int i = 0; i < DECK_SIZE - 1; i++){
-        std::cout << cardDeckNum[i] << " " << cardDeck[i] << " | ";
-    }
-    std::cout << "\n";
+        if(playerHand[playerHandIndex].value == 11 && playerCount > 21){
+            playerHand[playerHandIndex].value = playerHand[playerHandIndex].value - 10;
+            playerCount = playerCount - 10;
+        }
 */
-
