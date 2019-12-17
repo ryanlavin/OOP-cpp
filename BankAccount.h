@@ -23,6 +23,4 @@ private:
 
 class CheckingAccount : public BankAccount{
 public:
-
-
-}
+};
