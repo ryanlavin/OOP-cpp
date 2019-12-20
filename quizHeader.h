@@ -1,8 +1,9 @@
 #include <string>
+#include <vector>
 
 class Question {
 public:
-    Question(/*std::string, std::string*/);
+    Question();
     ~Question();
 
 // Gets the values
@@ -21,13 +22,15 @@ private:
 
 class MCQuestion : public Question{
 public:
+    MCQuestion();
+    //s~MCQuestion();
     int get_answer();
-    void set_answer(std::string int_answer);
+    //void set_answer(int int_answer);
     void add_choice(std::string choice, bool correct);
-    void display() const;
+    virtual void display();
 
 private:
     int answer_int;
     std::vector<std::string> choices;
 };
-*/
+

@@ -1,7 +1,7 @@
 #include "quizHeader.h"
 #include <iostream>
 #include <string>
-
+/*
 bool checkAnswer(std::string input, Question q1){
     bool answer;
     if(input == q1.get_answer()){
@@ -16,7 +16,7 @@ bool checkAnswer(std::string input, Question q1){
     }
     return answer;
 }
-
+*/
 int main(){
 
     Question q1;
@@ -27,14 +27,19 @@ int main(){
     std::cin >> input;
     q1.checkAnswer(input);
 
-/*
-    MCQuestion* q2 = new Question("What do you wanna do?", 3);
-    std::cout << q2.get_question() << std::endl;
-    int input2;
-    //std::cin >> input2;
+    MCQuestion q2;
+    q2.set_question("What year did the United States declare independence");
+    q2.set_answer("3");
+    q2.add_choice("1777", false);
+    q2.add_choice("1775", false);
+    q2.add_choice("1776", true);
+    q2.add_choice("1989", false);
+    q2.display();
+    std::string input2;
+    std::cin >> input2;
+
+    q2.checkAnswer(input2);
 
 
-    delete q2;
-*/
     return 0;
 }

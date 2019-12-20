@@ -1,14 +1,18 @@
 #include "quizHeader.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 
-Question::Question(/*std::string question, std::string answer*/){
-    //this->text = question;
-    //this->response = answer;
+Question::Question(){
+
 }
 
 Question::~Question(){
     // Nothing to delete
+}
+
+MCQuestion::MCQuestion(){
+
 }
 
 void Question::display(){
@@ -42,3 +46,21 @@ void Question::set_answer(std::string str_answer){
     this->response = str_answer;
     return;
 }
+
+void MCQuestion::display(){
+    Question::display();
+    for(int i = 0; i < choices.size(); i++){
+        std::cout << i+1 << ": " << choices[i] << std::endl;
+    }
+    return;
+}
+
+void MCQuestion::add_choice(std::string choice, bool correct){
+    choices.push_back(choice);
+    if(correct){
+        std::ostringstream stream;
+        stream << choices.size();
+        std::string num_str = stream.str();
+    }
+}
+
