@@ -14,10 +14,11 @@ public:
     void set_answer(std::string str_answer);
     void display();
     void checkAnswer(std::string response);
+    void displayScore();
 
 private:
-    std::string text;
-    std::string response;
+    std::string text, response;
+    int totalQuestions, numberCorrect;
 };
 
 class MCQuestion : public Question{

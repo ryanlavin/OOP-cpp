@@ -17,10 +17,14 @@ bool checkAnswer(std::string input, Question q1){
     return answer;
 }
 */
+
+//int updateScore(std::string input, int score, int totalCorrect, int totalQuestions){
+//    if()
+//}
 int main(){
 
     Question q1;
-    q1.set_question("What is the name of this program's writer?");
+    q1.set_question("What is the first name of this program's writer?");
     q1.set_answer("Ryan");
     q1.display();
     std::string input;
@@ -28,17 +32,25 @@ int main(){
     q1.checkAnswer(input);
 
     MCQuestion q2;
-    q2.set_question("What year did the United States declare independence");
+    q2.set_question("What year did the United States declare independence?");
     q2.set_answer("3");
     q2.add_choice("1777", false);
     q2.add_choice("1775", false);
     q2.add_choice("1776", true);
     q2.add_choice("1989", false);
     q2.display();
-    std::string input2;
-    std::cin >> input2;
+    //std::string input;
+    std::cin >> input;
+    q2.checkAnswer(input);
 
-    q2.checkAnswer(input2);
+    Question q3;
+    q3.set_question("What is the first name of this program's writer's sister?");
+    q3.set_answer("Jacqueline");
+    q3.display();
+    //std::string input;
+    std::cin >> input;
+    q3.checkAnswer(input);
+    q3.displayScore();
 
 
     return 0;

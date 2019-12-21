@@ -22,10 +22,13 @@ void Question::display(){
 
 void Question::checkAnswer(std::string input){
     if(this->response == input){
-        std::cout << "Correct!" << std::endl;
+        std::cout << "Correct" << std::endl;
+        this->totalQuestions += 1;
+        this->numberCorrect += 1;
     }
     else if(this->response != input){
-        std::cout << "Incorrect!" << std::endl;
+        std::cout << "Incorrect" << std::endl;
+        this->totalQuestions += 1;
     }
 }
 
@@ -44,6 +47,11 @@ void Question::set_question(std::string str_question){
 
 void Question::set_answer(std::string str_answer){
     this->response = str_answer;
+    return;
+}
+
+void Question::displayScore(){
+    std::cout << "Your score: " << numberCorrect/*(this->numberCorrect / this->totalQuestions)*100*/ << "%" << std::endl;
     return;
 }
 
