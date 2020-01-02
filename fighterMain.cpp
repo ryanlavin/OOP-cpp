@@ -2,13 +2,18 @@
 
 int main(){
     Pikachu pikachu;
-    pikachu.setHP(175);
     Charmander charmander;
-    charmander.setHP(150);
     Squirtle squirtle;
-    squirtle.setHP(200);
     Bulbasaur bulbasaur;
-    bulbasaur.setHP(150);
+    std::vector<int> HP(3);
+    for(int i=0; i<HP.size();i++){
+        int randoHP = 175;
+        pikachu.setHP(randoHP);
+        charmander.setHP(randoHP+25);
+        squirtle.setHP(randoHP+50);
+        bulbasaur.setHP(randoHP-25);
+    }
+
 
     return 0;
 }

@@ -12,8 +12,8 @@ public:
     virtual void addMove();
 
 private:
-    vector<int> hp, damage;
-    vector <std::string> choices;
+    std::vector<int> hp, damage;
+    std::vector <std::string> choices;
     bool HitMiss;
 };
 

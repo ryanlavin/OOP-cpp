@@ -22,7 +22,7 @@ fighter::tackle(){
         this->hp -= this->damage;
     }
     else if(this->HitMiss == false){
-        break;
+        std::cout << "The attack missed!" << std::endl;
     }
 }
 
@@ -32,7 +32,7 @@ fighter::heal(){
         this->hp += this->hp/2;
     }
     else if (this->HitMiss == false){
-        break;
+        std::cout << "The attack missed!" << std::endl;
     }
 }
 
@@ -43,7 +43,7 @@ fighter::bite(){
         this->hp -= this->damage
     }
     else if (this->HitMiss == false){
-        break;
+        std::cout << "The attack missed!" << std::endl;
     }
 }
 
@@ -53,9 +53,18 @@ fighter::setHP(std::vector<int> hp){
 
 void Pikachu::display(){
     Pikachu::display();
-    for(int i = 0; i < choices.size(); i++){
+    for(int i = 0; i < 4; i++){
         std::cout << i+1 << ": " << choices[i] << std::endl;
     }
     return;
+}
+
+void Pikachu::addMove(/*std::string choice, bool correct*/){
+    choices.push_back(choice);
+    if(correct){
+        std::ostringstream stream;
+        stream << choices.size();
+        std::string num_str = stream.str();
+    }
 }
 
