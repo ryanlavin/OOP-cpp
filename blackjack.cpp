@@ -90,11 +90,12 @@ int main(){
         }
     }
     //for testing before shuffle
+    /*
     for (int i = 0; i < DECK_SIZE; i++){
         std::cout << cardDeck[i].label << " ";
     }
     std::cout << "\n";
-
+*/
     // Cards are shuffled here
     srand(time(NULL)); // Makes the shuffling actually random
     for (int i = DECK_SIZE-1; i > 0; i--){
@@ -108,11 +109,12 @@ int main(){
     }
 
 // For testing post shuffle
+    /*
     for (int i = 0; i < DECK_SIZE; i++){
         std::cout << cardDeck[i].label << " ";
     }
     std::cout << "\n";
-
+*/
 /*
     * Two cards are dealt to player & dealer in alternating fashion
     * both of player's cards are face up (visible), the dealer's first card is hidden
