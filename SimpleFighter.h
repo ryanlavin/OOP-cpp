@@ -8,13 +8,15 @@ public:
     void set_OriginalHP(int OriginalHP);
     void attack(simpleFighter& Bulbasaur, simpleFighter& Pikachu, int input);
     void heal();
-    void add_move(simpleFighter& Bulbasaur, std::string move, int moves_damage);
+    void add_move(simpleFighter& Bulbasaur, std::string move, int moves_damage, double successRate);
     void display();
+    void setHitChance(double successRate);
 
     int get_HP();
     int get_OriginalHP();
     int get_move_damage(int input);
     void get_input(int input);
+    double getHitChance();
     std::string get_name();
 
 
@@ -26,4 +28,5 @@ private:
     std::vector<std::string> moves;
     int move_choice;
     std::vector<int> moves_damage;
+    double hitChance;
 };

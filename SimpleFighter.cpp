@@ -2,9 +2,15 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <random>
+#include <ctime>
 
 void simpleFighter::setHP(int hp){
     this->hp = hp;
+}
+
+void simpleFighter::setHitChance(double successRate){
+    this->hitChance = successRate;
 }
 
 void simpleFighter::setName(std::string name){
@@ -22,12 +28,22 @@ void simpleFighter::get_input(int input){
 
 // Make sure to pass the attacking pokemon first, where Bulbasaur is in this case
 void simpleFighter::attack(simpleFighter& Bulbasaur, simpleFighter& Pikachu, int input){
-    if(Bulbasaur.get_move_damage(input) < 0){
-        Bulbasaur.setHP(Bulbasaur.get_HP() - Bulbasaur.get_move_damage(input));
+    //srand(time(NULL)); // For random chance
+    double j = rand() % (100);
+    std::cout << j/100 << std::endl;
+    if((j/100) < Bulbasaur.getHitChance()){
+        std::cout << "The attack missed!" << std::endl;
     }
-    else if(Bulbasaur.get_move_damage(input) >= 0){
-        Pikachu.setHP(Pikachu.get_HP() - Bulbasaur.get_move_damage(input));
+    else if((j/100) >= Bulbasaur.getHitChance()){
+        std::cout << "The attack landed and did " << Bulbasaur.get_move_damage(input) << " damage!" << std::endl;
+        if(Bulbasaur.get_move_damage(input) < 0){
+            Bulbasaur.setHP(Bulbasaur.get_HP() - Bulbasaur.get_move_damage(input));
+        }
+        else if(Bulbasaur.get_move_damage(input) >= 0){
+            Pikachu.setHP(Pikachu.get_HP() - Bulbasaur.get_move_damage(input));
+        }
     }
+
 }
 
 
@@ -36,7 +52,8 @@ void simpleFighter::heal(){
     this->hp += this->OriginalHP/2;
 }
 
-void simpleFighter::add_move(simpleFighter& Bulbasaur, std::string move, int move_damage){
+void simpleFighter::add_move(simpleFighter& Bulbasaur, std::string move, int move_damage, double successRate){
+    simpleFighter::setHitChance(successRate);
     moves.push_back(move);
     moves_damage.push_back(move_damage);
     std::ostringstream stream;
@@ -57,6 +74,10 @@ int simpleFighter::get_move_damage(int input){
         }
     }
     return 1;
+}
+
+double simpleFighter::getHitChance(){
+    return this->hitChance;
 }
 
 void simpleFighter::display(){
