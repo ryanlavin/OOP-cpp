@@ -4,6 +4,7 @@
 #include <sstream>
 #include <random>
 #include <ctime>
+#include <fstream>
 
 void simpleFighter::setHP(int hp){
     this->hp = hp;
@@ -44,12 +45,6 @@ void simpleFighter::attack(simpleFighter& Bulbasaur, simpleFighter& Pikachu, int
         }
     }
 
-}
-
-
-
-void simpleFighter::heal(){
-    this->hp += this->OriginalHP/2;
 }
 
 void simpleFighter::add_move(simpleFighter& Bulbasaur, std::string move, int move_damage, double successRate){
@@ -99,4 +94,41 @@ int simpleFighter::get_OriginalHP(){
 std::string simpleFighter::get_name(){
     return this->fighter_name;
 }
+
+//Below this is the implementation of FighterInstantiation class
+
+void FighterInstantiation::ReadFromFile(){
+	std::ifstream inFile;
+	inFile.open("SimpleFighter.txt");
+	if(!inFile){
+		throw "Error opening file, please try again.";
+	}
+	std::string line;
+	while(std::getline(inFile, line)){
+		std::string fighterName;	
+		int health;
+		inFile >> fighterName >> health;
+		FighterInstantiation::setHP(health);
+		FighterInstantiation::setFighterName(fighterName);
+}
+}
+void FighterInstantiation::setHP(int health){
+	this->hp1 = health;
+}
+
+int FighterInstantiation::getHP(){
+	return this->hp1;
+}
+
+//void FighterInstantiation::getMoveOneHitChance{
+//	this->
+//}
+
+void FighterInstantiation::setFighterName(std::string fighterName){
+	this->FighterName = fighterName;
+}
+std::string FighterInstantiation::getFighterName(){
+	return this->FighterName;
+}
+
 

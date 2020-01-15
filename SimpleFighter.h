@@ -7,7 +7,6 @@ public:
     void setName(std::string name);
     void set_OriginalHP(int OriginalHP);
     void attack(simpleFighter& Bulbasaur, simpleFighter& Pikachu, int input);
-    void heal();
     void add_move(simpleFighter& Bulbasaur, std::string move, int moves_damage, double successRate);
     void display();
     void setHitChance(double successRate);
@@ -29,4 +28,34 @@ private:
     int move_choice;
     std::vector<int> moves_damage;
     double hitChance;
+};
+
+class FighterInstantiation{
+    public:
+
+// Getters that will be used to stream into simpleFighter class
+	int getHP();
+	void setHP(int health);
+//	void getMoveOneHitChance;
+//	void getMoveTwoHitChance;
+//	void getMoveThreeHitChance;
+//	void getMoveFourHitChance;
+//	void getMoveOneDamage;
+//	void getMoveTwoDamage;
+//	void getMoveThreeDamage;
+	std::string  getFighterName();
+	void setFighterName(std::string fighterName);
+//	void getMoveOne();
+//	void getMoveTwo();
+//	void getMoveThree();
+//	void getMoveFour();
+	void ReadFromFile();
+
+    private:
+	int hp1;
+	std::string FighterName;
+	std::vector<std::string> moves1;
+	std::vector<int> moves_damage1;
+	std::vector<double> moves_hitChance;	
+	
 };

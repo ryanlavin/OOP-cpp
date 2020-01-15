@@ -1,0 +1,2 @@
+Pikachu 50 Tackle 20 0.90 Bite 40 0.70 Heal -0.5 0.50
+Bulbasaur 60 Tackle 15 0.90 Bite 30 0.70 Heal -0.5 0.50
