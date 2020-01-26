@@ -18,14 +18,24 @@ int main(){
     Pikachu.add_move(Pikachu, "Bite", 40, 0.70);
     Pikachu.add_move(Pikachu, "Heal", -0.5*(Pikachu.get_HP()), 0.50);
     //Pikachu.display();
+    std::vector<FighterInstantiation> vectorOfFighters;
     FighterInstantiation Pikachu1, Bulbasaur1;
-    Pikachu1.ReadFromFile();
-    std::cout << Pikachu1.getFighterName() << std::endl;
-    std::cout << Pikachu1.getHP() << std::endl;
+    vectorOfFighters.push_back(Pikachu1);
+    vectorOfFighters.push_back(Bulbasaur1);
+   // Pikachu1.ReadFromFile();
+    for(int i = 0; i < vectorOfFighters.size(); i++){
+	(vectorOfFighters[i]).ReadFromFile(i); 
+	FighterInstantiation *ptr = &(vectorOfFighters[i]);
+	std::cout << ptr->(vectorOfFighters[i]).getHP() << std::endl;
+   	std::cout << ptr->(vectorOfFighters[i]).getFighterName() << std::endl;
+	std::cout << ptr->(vectorOfFighters[i]).getHP() << std::endl;	
+    }
+  //  std::cout << Pikachu1.getFighterName() << std::endl;
+  // std::cout << Pikachu1.getHP() << std::endl;
 
-    Bulbasaur1.ReadFromFile();
-    std::cout << Bulbasaur1.getFighterName() << std::endl;
-    std::cout << Bulbasaur1.getHP() << std::endl;
+   // Bulbasaur1.ReadFromFile();
+   // std::cout << Bulbasaur1.getFighterName() << std::endl;
+  //  std::cout << Bulbasaur1.getHP() << std::endl;
 
     simpleFighter Bulbasaur;
     Bulbasaur.setHP(60);

@@ -97,7 +97,7 @@ std::string simpleFighter::get_name(){
 
 //Below this is the implementation of FighterInstantiation class
 
-void FighterInstantiation::ReadFromFile(){
+void FighterInstantiation::ReadFromFile(int lineIndex){
 	std::ifstream inFile;
 	inFile.open("SimpleFighter.txt");
 	if(!inFile){
@@ -110,6 +110,7 @@ void FighterInstantiation::ReadFromFile(){
 		inFile >> fighterName >> health;
 		FighterInstantiation::setHP(health);
 		FighterInstantiation::setFighterName(fighterName);
+		this->lineIndex++;
 }
 }
 void FighterInstantiation::setHP(int health){

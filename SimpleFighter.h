@@ -49,7 +49,7 @@ class FighterInstantiation{
 //	void getMoveTwo();
 //	void getMoveThree();
 //	void getMoveFour();
-	void ReadFromFile();
+	void ReadFromFile(int lineIndex);
 
     private:
 	int hp1;
@@ -57,5 +57,5 @@ class FighterInstantiation{
 	std::vector<std::string> moves1;
 	std::vector<int> moves_damage1;
 	std::vector<double> moves_hitChance;	
-	
+	int lineIndex;	
 };
