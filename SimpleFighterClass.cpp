@@ -5,7 +5,6 @@
 Fighter::Fighter(std::string name, int hp){
 	Fighter::name = name;
 	Fighter::hp = hp;
-
 }
 
 std::string Fighter::GetName(){

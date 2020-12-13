@@ -2,7 +2,6 @@
 
 class BankAccount{
 public:
-
     //BankAccount();
     //~BankAccount();
 // Get the values

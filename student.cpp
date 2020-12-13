@@ -1,10 +1,9 @@
-openo#include "student.h"
+#include "student.h"
 
 student::student(std::string name, int id){
     this->student_name = name;
     this->student_id = id;
 }
-
 student::~student(){
     //nothing to delete so this is empty
 }
